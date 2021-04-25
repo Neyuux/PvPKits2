@@ -1,0 +1,18 @@
+name: PvPKits
+version: 1.0.3
+author: Neyuux_
+main: fr.neyuux.pvpkits.Index
+commands:
+  team:
+    description: Commande des teams
+    aliases: [t, te, equipe, equipes, teams]
+#  end:
+#    description: Termine la partie actuelle
+#    permission: end.use
+#  spec:
+#    description: Commande spectateur
+#    aliases: [s, spectateur, sp, spectateurs, spect]
+#  start:
+#    description: Demarre la partie
+#    aliases: [st, run]
+#    permission: start.use

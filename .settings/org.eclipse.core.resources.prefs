@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//src/fr/neyuux/pvpkits/Index.java=UTF-8
+encoding//src/fr/neyuux/pvpkits/PlayerKits.java=UTF-8
+encoding//src/fr/neyuux/pvpkits/commands/StartExecutor.java=UTF-8
+encoding//src/fr/neyuux/pvpkits/enums/Kits.java=UTF-8
+encoding//src/fr/neyuux/pvpkits/listener/KitsDamageListener.java=UTF-8
+encoding//src/fr/neyuux/pvpkits/listener/KitsListener.java=UTF-8
+encoding//src/fr/neyuux/pvpkits/task/KitsAutoStart.java=UTF-8
