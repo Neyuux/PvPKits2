@@ -12,16 +12,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.PlayerKits;
 import fr.neyuux.pvpkits.enums.Gstate;
 import fr.neyuux.pvpkits.enums.Teams;
 
 public class SpecExecutor implements Listener {
 
-	private Index main;
+	private PvPKits main;
 	
-	public SpecExecutor(Index main) {
+	public SpecExecutor(PvPKits main) {
 		this.main = main;
 	}
 	

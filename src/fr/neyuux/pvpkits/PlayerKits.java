@@ -30,9 +30,9 @@ import java.util.Map.Entry;
 
 public class PlayerKits {
 
-	private final Index main;
+	private final PvPKits main;
 	
-	public PlayerKits(Index main, Player player) {
+	public PlayerKits(PvPKits main, Player player) {
 		this.main = main;
 		this.player = player;
 	}
@@ -123,7 +123,7 @@ public class PlayerKits {
 	
 	public void GiveStuff() {
 		if (getKit() == null) throw new NullPointerException("On ne peut pas give le stuff d'un joueur qui n'a pas de kit");
-		Index.sendActionBarForAllPlayers(main.getPrefix() + "§8Stuffing " + player.getDisplayName());
+		PvPKits.sendActionBarForAllPlayers(main.getPrefix() + "§8Stuffing " + player.getDisplayName());
 		getKit().GiveStuff(getPlayer());
 	}
 	
@@ -333,7 +333,7 @@ public class PlayerKits {
 		if (CSLGGML != -1) CSLGGML--;
 		if (CSLGInf != -1) CSLGInf--;
 		if (CSLGInvi != -1) CSLGInvi--;
-		Index.sendActionBar(player, main.getPrefix() + "§b§lV§4§lG§c§lP§4§lL§8§lG§f§lB§3§lA§7§lA §fterminé dans §l" + CSLGVGPLGBAA + " secondes§f.");
+		PvPKits.sendActionBar(player, main.getPrefix() + "§b§lV§4§lG§c§lP§4§lL§8§lG§f§lB§3§lA§7§lA §fterminé dans §l" + CSLGVGPLGBAA + " secondes§f.");
 	}
 	
 	public void resetLGCS() {

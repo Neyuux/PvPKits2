@@ -29,8 +29,8 @@ import java.util.Map.Entry;
 
 public class GameConfig implements Listener {
 
-	private final Index main;
-	public GameConfig(Index main) {
+	private final PvPKits main;
+	public GameConfig(PvPKits main) {
 		this.main = main;
 	}
 	

@@ -11,9 +11,9 @@ import fr.neyuux.pvpkits.enums.Teams;
 import fr.neyuux.pvpkits.listener.KitsDamageListener;
 import fr.neyuux.pvpkits.listener.KitsListener;
 import fr.neyuux.pvpkits.task.KitsAutoStart;
-import net.minecraft.server.v1_8_R3.*;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
-import org.bukkit.Material;
+import net.minecraft.server.v1_8_R3.IChatBaseComponent;
+import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
+import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -34,7 +34,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.Map.Entry;
 
-public class Index extends JavaPlugin {
+public class PvPKits extends JavaPlugin {
 	
 	public List<UUID> players = new ArrayList<>();
 	public List<Player> spectators = new ArrayList<>();
@@ -46,7 +46,7 @@ public class Index extends JavaPlugin {
 	public static final HashMap<String, List<UUID>> Grades = new HashMap<>();
 	
 	private GameConfig config = new GameConfig(this);
-	public static Index instance;
+	public static PvPKits instance;
 	
 	public String getPrefix() {
 		return prefix;
@@ -442,7 +442,7 @@ public class Index extends JavaPlugin {
 				ob.unregister();
 		}
 		
-		List<String> tc = new ArrayList<String>();
+		List<String> tc = new ArrayList<>();
 		tc.add("Rouge"); //F
 		tc.add("Bleu");//C
 		tc.add("Vert");//D
@@ -516,89 +516,91 @@ public class Index extends JavaPlugin {
 		
 		Teams.reloadTeams();
 	}
-	
-	
-	
-	
-	public static void sendActionBar(Player p, String message) {
-        IChatBaseComponent cbc = ChatSerializer.a("{\"text\": \"" + message + "\"}");
-        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte) 2);
-        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(ppoc);
-    }
-	
-	public static void sendActionBarForAllPlayers(String message) {
-		for (Player p : Bukkit.getOnlinePlayers()) {
-			sendActionBar(p, message);
-		}
-	}
+
+
+
 
 	public static void setPlayerTabList(Player player,String header, String footer) {
-		PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 		IChatBaseComponent tabTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + header + "\"}");
 		IChatBaseComponent tabFoot = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + footer + "\"}");
-		PacketPlayOutPlayerListHeaderFooter headerPacket = new PacketPlayOutPlayerListHeaderFooter(tabTitle);
+		PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter(tabTitle);
 		try {
-			Field field = headerPacket.getClass().getDeclaredField("b");
+			Field field = packet.getClass().getDeclaredField("b");
 			field.setAccessible(true);
-			field.set(headerPacket, tabFoot);
+			field.set(packet, tabFoot);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			connection.sendPacket(headerPacket);
+			sendPacket(player, packet);
 		}
 	}
-    
-    private void sendPacket(Player player, Object packet) {
-        try {
-            Object handle = player.getClass().getMethod("getHandle").invoke(player);
-            Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
-            playerConnection.getClass().getMethod("sendPacket", getNMSClass("Packet")).invoke(playerConnection, packet);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    private Class<?> getNMSClass(String name) {
-        try {
-            return Class.forName("net.minecraft.server."
-                    + Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3] + "." + name);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public void sendTitle(Player player, String title, String subtitle, int fadeInTime, int showTime, int fadeOutTime) {
-        try {
-            Object chatTitle = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class)
-                    .invoke(null, "{\"text\": \"" + title + "\"}");
-            Constructor<?> titleConstructor = getNMSClass("PacketPlayOutTitle").getConstructor(
-                    getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0], getNMSClass("IChatBaseComponent"),
-                    int.class, int.class, int.class);
-            Object packet = titleConstructor.newInstance(
-                    getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TITLE").get(null), chatTitle,
-                    fadeInTime, showTime, fadeOutTime);
 
-            Object chatsTitle = getNMSClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class)
-                    .invoke(null, "{\"text\": \"" + subtitle + "\"}");
-            Constructor<?> timingTitleConstructor = getNMSClass("PacketPlayOutTitle").getConstructor(
-                    getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0], getNMSClass("IChatBaseComponent"),
-                    int.class, int.class, int.class);
-            Object timingPacket = timingTitleConstructor.newInstance(
-                    getNMSClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("SUBTITLE").get(null), chatsTitle,
-                    fadeInTime, showTime, fadeOutTime);
 
-            sendPacket(player, packet);
-            sendPacket(player, timingPacket);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void sendTitleForAllPlayers(String title, String subtitle, int fadeInTime, int showTime, int fadeOutTime) {
-    	for (Player player : Bukkit.getOnlinePlayers())
-    		sendTitle(player, title, subtitle, fadeInTime, showTime, fadeOutTime);
-    }
+	private static void sendPacket(Player player, Object packet) {
+		try {
+			Object handle = player.getClass().getMethod("getHandle").invoke(player);
+			Object playerConnection = handle.getClass().getField("playerConnection").get(handle);
+			playerConnection.getClass().getMethod("sendPacket", getNMSClass("Packet")).invoke(playerConnection, packet);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static Class<?> getNMSClass(String name) {
+		try {
+			return Class.forName("net.minecraft.server."
+					+ Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3] + "." + name);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static void sendTitle(Player player, String title, String subtitle, int fadeInTime, int showTime, int fadeOutTime) {
+		try {
+			Object chatTitle = Objects.requireNonNull(getNMSClass("IChatBaseComponent")).getDeclaredClasses()[0].getMethod("a", String.class)
+					.invoke(null, "{\"text\": \"" + title + "\"}");
+			Constructor<?> titleConstructor = Objects.requireNonNull(getNMSClass("PacketPlayOutTitle")).getConstructor(
+					Objects.requireNonNull(getNMSClass("PacketPlayOutTitle")).getDeclaredClasses()[0], getNMSClass("IChatBaseComponent"),
+					int.class, int.class, int.class);
+			Object packet = titleConstructor.newInstance(
+					Objects.requireNonNull(getNMSClass("PacketPlayOutTitle")).getDeclaredClasses()[0].getField("TITLE").get(null), chatTitle,
+					fadeInTime, showTime, fadeOutTime);
+
+			Object chatsTitle = Objects.requireNonNull(getNMSClass("IChatBaseComponent")).getDeclaredClasses()[0].getMethod("a", String.class)
+					.invoke(null, "{\"text\": \"" + subtitle + "\"}");
+			Constructor<?> timingTitleConstructor = Objects.requireNonNull(getNMSClass("PacketPlayOutTitle")).getConstructor(
+					Objects.requireNonNull(getNMSClass("PacketPlayOutTitle")).getDeclaredClasses()[0], getNMSClass("IChatBaseComponent"),
+					int.class, int.class, int.class);
+			Object timingPacket = timingTitleConstructor.newInstance(
+					Objects.requireNonNull(getNMSClass("PacketPlayOutTitle")).getDeclaredClasses()[0].getField("SUBTITLE").get(null), chatsTitle,
+					fadeInTime, showTime, fadeOutTime);
+
+			sendPacket(player, packet);
+			sendPacket(player, timingPacket);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void sendTitleForAllPlayers(String title, String subtitle, int fadeInTime, int showTime, int fadeOutTime) {
+		for (Player p : Bukkit.getOnlinePlayers())
+			sendTitle(p, title, subtitle, fadeInTime, showTime, fadeOutTime);
+	}
+
+
+	public static void sendActionBar(Player p, String message) {
+		IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + message + "\"}");
+		PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte) 2);
+		try {
+			((CraftPlayer) p).getHandle().playerConnection.sendPacket(ppoc);
+		} catch (NullPointerException e) {e.printStackTrace();}
+	}
+
+	public static void sendActionBarForAllPlayers(String message) {
+		for (Player p : Bukkit.getOnlinePlayers()) sendActionBar(p, message);
+	}
 
 	
 }

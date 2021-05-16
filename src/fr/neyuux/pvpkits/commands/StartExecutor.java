@@ -1,6 +1,6 @@
 package fr.neyuux.pvpkits.commands;
 
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.PlayerKits;
 import fr.neyuux.pvpkits.PlayerKits.CSState;
 import fr.neyuux.pvpkits.enums.Gstate;
@@ -28,8 +28,8 @@ import java.util.UUID;
 
 public class StartExecutor implements Listener {
 	
-	private final Index main;
-	public StartExecutor(Index main) {
+	private final PvPKits main;
+	public StartExecutor(PvPKits main) {
 		this.main = main;
 	}
 
@@ -74,7 +74,7 @@ public class StartExecutor implements Listener {
 					playerkits.resetKills();
 					playerkits.setLastTape(null);
 					
-					Index.sendActionBarForAllPlayers(main.getPrefix() + "§8Scattering " + player.getDisplayName());
+					PvPKits.sendActionBarForAllPlayers(main.getPrefix() + "§8Scattering " + player.getDisplayName());
 					player.teleport(playerkits.getTeam().getSpawnIle());
 					
 					player.setGameMode(GameMode.SURVIVAL);

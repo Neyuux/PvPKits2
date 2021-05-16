@@ -1,6 +1,6 @@
 package fr.neyuux.pvpkits.task;
 
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.PlayerKits;
 import fr.neyuux.pvpkits.PlayerKits.CSState;
 import fr.neyuux.pvpkits.enums.Gstate;
@@ -25,8 +25,8 @@ import java.util.UUID;
 public class KitsAutoStart extends BukkitRunnable {
 
 	private static int timer = 11;
-	private final Index main;
-	public KitsAutoStart(Index main) {
+	private final PvPKits main;
+	public KitsAutoStart(PvPKits main) {
 		this.main = main;
 		timer = 11;
 	}
@@ -95,7 +95,7 @@ public class KitsAutoStart extends BukkitRunnable {
 				if (playerkits.isKit(Kits.SORCIERE))
 					playerkits.startTimerGenSoso();
 				
-				Index.sendActionBarForAllPlayers(main.getPrefix() + "§8Scattering " + player.getDisplayName());
+				PvPKits.sendActionBarForAllPlayers(main.getPrefix() + "§8Scattering " + player.getDisplayName());
 				player.teleport(playerkits.getTeam().getSpawnIle());
 				
 				player.setGameMode(GameMode.SURVIVAL);

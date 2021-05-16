@@ -1,6 +1,6 @@
 package fr.neyuux.pvpkits.task;
 
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.PlayerKits;
 import fr.neyuux.pvpkits.ScoreboardSign;
 import fr.neyuux.pvpkits.enums.Gstate;
@@ -15,8 +15,8 @@ import java.util.Map.Entry;
 public class KitsAutoStop extends BukkitRunnable {
 	
 	private static int timer = 30;
-	private final Index main;
-	public KitsAutoStop(Index main) {
+	private final PvPKits main;
+	public KitsAutoStop(PvPKits main) {
 		this.main = main;
 		timer = 30;
 	}

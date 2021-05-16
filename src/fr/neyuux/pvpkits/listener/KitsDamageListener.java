@@ -1,6 +1,6 @@
 package fr.neyuux.pvpkits.listener;
 
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.PlayerKits;
 import fr.neyuux.pvpkits.PlayerKits.CSPyro;
 import fr.neyuux.pvpkits.ScoreboardSign;
@@ -28,8 +28,8 @@ import java.util.UUID;
 
 public class KitsDamageListener implements Listener {
 
-	private final Index main;
-	public KitsDamageListener(Index main) {
+	private final PvPKits main;
+	public KitsDamageListener(PvPKits main) {
 		this.main = main;
 	}
 	
@@ -314,7 +314,7 @@ public class KitsDamageListener implements Listener {
 				PlayerKits killerKits = main.playerkits.get(killer.getUniqueId());
 				
 				if (!main.isState(Gstate.PLAYING)) {
-					Index.sendActionBar(killer, main.getPrefix() + "§cLe PvP n'est pas activé !");
+					PvPKits.sendActionBar(killer, main.getPrefix() + "§cLe PvP n'est pas activé !");
 					killer.playSound(player.getLocation(), Sound.ITEM_BREAK, 5, 1);
 					return;
 				}
@@ -332,7 +332,7 @@ public class KitsDamageListener implements Listener {
 				if (killerKits.CSLGInvi != -1 && killerKits.isKit(Kits.LG)) {
 					for (Player p : Bukkit.getOnlinePlayers())
 						p.showPlayer(killer);
-					Index.sendActionBar(killer, main.getPrefix() + "§7Vous n'êtes plus invisible.");
+					PvPKits.sendActionBar(killer, main.getPrefix() + "§7Vous n'êtes plus invisible.");
 					killerKits.CSLGInvi = -1;
 				}
 				

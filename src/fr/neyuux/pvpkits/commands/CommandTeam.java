@@ -10,14 +10,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.enums.Teams;
 
 public class CommandTeam implements CommandExecutor {
 	
-	private Index main;
+	private PvPKits main;
 	
-	public CommandTeam(Index main) {
+	public CommandTeam(PvPKits main) {
 		this.main = main;
 	}
 	

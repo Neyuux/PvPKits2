@@ -1,6 +1,6 @@
 package fr.neyuux.pvpkits.task;
 
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.PlayerKits;
 import fr.neyuux.pvpkits.PlayerKits.CSMili;
 import fr.neyuux.pvpkits.ScoreboardSign;
@@ -24,8 +24,8 @@ import java.util.UUID;
 public class GameRunnable extends BukkitRunnable {
 
 	private static int timer = 0;
-	private final Index main;
-	public GameRunnable(Index main) {
+	private final PvPKits main;
+	public GameRunnable(PvPKits main) {
 		this.main = main;
 		timer = 0;
 	}
@@ -99,7 +99,7 @@ public class GameRunnable extends BukkitRunnable {
 					int timerLGB = playerkits.CSLGB;
 					
 					if (timerInvi == 0) {
-						Index.sendActionBar(player, main.getPrefix() + "§bVous êtes de nouveau visible !");
+						PvPKits.sendActionBar(player, main.getPrefix() + "§bVous êtes de nouveau visible !");
 						for (Player p : Bukkit.getOnlinePlayers())
 							p.showPlayer(player);
 						playerkits.CSLGInvi = -1;
@@ -125,8 +125,8 @@ public class GameRunnable extends BukkitRunnable {
 				if (playerkits.getTimerBowSpam() != -1 && playerkits.isKit(Kits.MILITAIRE)) {
 					int timer = playerkits.getTimerBowSpam();
 					if (timer != 1)
-						Index.sendActionBar(player, main.getPrefix() + CSMili.BOWSPAM.getName() + " §fdure encore §l" + timer + "§f secondes.");
-					else Index.sendActionBar(player, main.getPrefix() + CSMili.BOWSPAM.getName() + " §fdure encore §l" + timer + "§f seconde.");
+						PvPKits.sendActionBar(player, main.getPrefix() + CSMili.BOWSPAM.getName() + " §fdure encore §l" + timer + "§f secondes.");
+					else PvPKits.sendActionBar(player, main.getPrefix() + CSMili.BOWSPAM.getName() + " §fdure encore §l" + timer + "§f seconde.");
 					
 					if (timer != 0)
 						playerkits.removeSecondBowSpam();

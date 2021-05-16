@@ -1,7 +1,7 @@
 package fr.neyuux.pvpkits.listener;
 
 import com.google.common.collect.ImmutableList;
-import fr.neyuux.pvpkits.Index;
+import fr.neyuux.pvpkits.PvPKits;
 import fr.neyuux.pvpkits.PlayerKits;
 import fr.neyuux.pvpkits.PlayerKits.*;
 import fr.neyuux.pvpkits.enums.Gstate;
@@ -46,9 +46,9 @@ import java.util.Map.Entry;
 
 public class KitsListener implements Listener {
 	
-	private final Index main;
+	private final PvPKits main;
 	private final HashMap<Kits, List<String>> kitsLores = new HashMap<Kits, List<String>>();
-	public KitsListener(Index main) {
+	public KitsListener(PvPKits main) {
 		this.main = main;
 		kitsLores.put(Kits.TOAD, Arrays.asList("§6§l§nCapacité Spéciale§r §7\"§7§lN§5uage §2§lT§aoxique§7\" §6§l§n:§e Fait", "§eapparaître un nuage toxique qui donne Wither", "§eà toutes les personnes qui y passent.", "§b§nPassif§r §b§n:§f Obtient Régénération à côté de ses alliés §o(5blocks)", "§2Casque §6en §lCuir§7(§8Prot §46§7, §3Ub §f1§7, §5Thorns §46§7) §fx2", "§1Plastron §fen §lFer§7(§8Protection §a2§7)", "§bPantalon §fen §lFer§7(§8Protection §a2§7)", "§aBottes §fen §lFer§7(§8Protection §a2§7)", "§4Épée §ben §lDiamant§7(§4Sharpness §f1§7)", "§2Potion de Poison §833s", "§8Potion de Wither 20s", "§9§nClasse§r §9§n:§1 Combattant"));
 		kitsLores.put(Kits.PYROMANE, Arrays.asList("§6§l§nCapacité Spéciale§r §7\"§6§lT§eourbillion de §6§lL§6ave§7\" §6§l§n:§e Fait", "§eapparaître du feu et de lave autour du joueur.", "§f§lOU", "§6§l§nCapacité Spéciale 2§r §7\"§6§lI§enflammation §4§lV§5ampirique§7\" : §eLe", "§efeu régénére le joueur, mais la durabilité du briquet", "§epasse à 10.", "§2Casque §7en §lMaille§7(§8Protection §f1, §6Fire§8Prot §a2§7)", "§1Plastron §7en §lMaille§7(§8Protection §a2, §6Fire§8Prot §a2§7)", "§bPantalon §7en §lMaille§7(§8Protection §c4, §6Fire§8Prot §e3§7)", "§aBottes §7en §lMaille§7(§8Protection §c4, §6Fire§8Prot §c4§7, §cProj§8Prot §a2§7)", "§4Épée §7en §lPierre§7(§4Sharpness §a2, §6Fire Aspect §f1§7)", "§cArc§7(§6Flame§7) §fFlèches x16", "§6Briquet", "§9§nClasse§r §9§n:§1 Tireur"));
@@ -83,7 +83,7 @@ public class KitsListener implements Listener {
 		
 		main.updateGrades();
 		if (!main.playerkits.containsKey(player.getUniqueId())) main.playerkits.put(player.getUniqueId(), new PlayerKits(main, player));
-		Index.setPlayerTabList(player, main.getPrefix() + "\n" + "§fBienvenue sur la map de §c§lNeyuux_" + "\n", "\n" + "§fMerci à §emini0x_ §fet §expbush §f les builders !");
+		PvPKits.setPlayerTabList(player, main.getPrefix() + "\n" + "§fBienvenue sur la map de §c§lNeyuux_" + "\n", "\n" + "§fMerci à §emini0x_ §fet §expbush §f les builders !");
 		
 		player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 0, true, false));
 		player.setGameMode(GameMode.ADVENTURE);
@@ -162,7 +162,7 @@ public class KitsListener implements Listener {
 			ev.setCancelled(true);
 		if (!main.blocknomap.contains(block) && !player.getGameMode().equals(GameMode.CREATIVE)) {
 			ev.setCancelled(true);
-			Index.sendActionBar(player, main.getPrefix() + "§c Vous ne pouvez pas cassez un block §4qui n'a pas été posé par un joueur !");
+			PvPKits.sendActionBar(player, main.getPrefix() + "§c Vous ne pouvez pas cassez un block §4qui n'a pas été posé par un joueur !");
 		}
 		main.blocknomap.remove(block);
 	}
@@ -1055,12 +1055,12 @@ public class KitsListener implements Listener {
 				playerkits.setCSHeal(CSHeal.REGENERATION);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "La capacité " + CSHeal.REGENERATION.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "La capacité " + CSHeal.REGENERATION.getName() + " §fa été choisie !");
 			} else if (current.getType().equals(Material.NETHER_STAR)) {
 				playerkits.setCSHeal(CSHeal.REANIMATION);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSHeal.REANIMATION.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSHeal.REANIMATION.getName() + " §fa été choisie !");
 			}
 			player.closeInventory();
 		} else if (inv.getName().equals(Kits.SORCIERE.getName())) {
@@ -1069,12 +1069,12 @@ public class KitsListener implements Listener {
 				playerkits.setCSSoso(CSSoso.CORBEAU_NIQUEUR);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "La capacité " + CSSoso.CORBEAU_NIQUEUR.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "La capacité " + CSSoso.CORBEAU_NIQUEUR.getName() + " §fa été choisie !");
 			} else if (current.getType().equals(Material.RAW_FISH)) {
 				playerkits.setCSSoso(CSSoso.EMPOISONNEMENT);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSSoso.EMPOISONNEMENT.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSSoso.EMPOISONNEMENT.getName() + " §fa été choisie !");
 			}
 			player.closeInventory();
 		} else if (inv.getName().equals(Kits.XRAYEUR.getName())) {
@@ -1083,12 +1083,12 @@ public class KitsListener implements Listener {
 				playerkits.setCSXRay(CSXRay.TELEPORT);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "La capacité " + CSXRay.TELEPORT.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "La capacité " + CSXRay.TELEPORT.getName() + " §fa été choisie !");
 			} else if (current.getType().equals(Material.ENDER_PORTAL_FRAME)) {
 				playerkits.setCSXRay(CSXRay.TP_AURA);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSXRay.TP_AURA.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSXRay.TP_AURA.getName() + " §fa été choisie !");
 			}
 			player.closeInventory();
 		} else if (inv.getName().equals(Kits.PYROMANE.getName().replaceAll("§l", ""))) {
@@ -1097,12 +1097,12 @@ public class KitsListener implements Listener {
 				playerkits.setCSPyro(CSPyro.TOURBILLION_DE_LAVE);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "La capacité " + CSPyro.TOURBILLION_DE_LAVE.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "La capacité " + CSPyro.TOURBILLION_DE_LAVE.getName() + " §fa été choisie !");
 			} else if (current.getType().equals(Material.POTION)) {
 				playerkits.setCSPyro(CSPyro.INFLAMMATION_VAMPIRIQUE);
 				playerkits.setCSState(CSState.USED);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSPyro.INFLAMMATION_VAMPIRIQUE.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSPyro.INFLAMMATION_VAMPIRIQUE.getName() + " §fa été choisie !");
 				for(int i = 1; i <= 35; i++) {
 					ItemStack item = player.getInventory().getItem(i);
 					if (!(item == null))
@@ -1127,12 +1127,12 @@ public class KitsListener implements Listener {
 				playerkits.setCSMili(CSMili.ARRAIN);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "La capacité " + CSMili.ARRAIN.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "La capacité " + CSMili.ARRAIN.getName() + " §fa été choisie !");
 			} else if (current.getType().equals(Material.GOLDEN_APPLE)) {
 				playerkits.setCSMili(CSMili.BOWSPAM);
 				playerkits.setCSState(CSState.READY);
 				player.playSound(player.getLocation(), Sound.NOTE_PLING, 10, 1);
-				Index.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSMili.BOWSPAM.getName() + " §fa été choisie !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "§fLa capacité " + CSMili.BOWSPAM.getName() + " §fa été choisie !");
 			}
 			player.closeInventory();
 		}
@@ -1176,7 +1176,7 @@ public class KitsListener implements Listener {
 			ev.setCancelled(true);
 			Player p = Bukkit.getPlayer(((SkullMeta)current.getItemMeta()).getOwner());
 			PlayerKits pkits = main.playerkits.get(p.getUniqueId());
-			Index.sendActionBarForAllPlayers(main.getPrefix() + "§8Scattering " + p.getDisplayName());
+			PvPKits.sendActionBarForAllPlayers(main.getPrefix() + "§8Scattering " + p.getDisplayName());
 			p.teleport(playerkits.getTeam().getSpawnIle());
 			p.setFallDistance(0f);
 			
@@ -1449,7 +1449,7 @@ public class KitsListener implements Listener {
 		
 		loc.getChunk().load();
 		e1.setCustomName("§eGilet Jaune " + player.getDisplayName());
-		Index.sendActionBar(player, main.getPrefix() + e1.getCustomName() + " §eest apparu !");
+		PvPKits.sendActionBar(player, main.getPrefix() + e1.getCustomName() + " §eest apparu !");
 		main.playerkits.get(player.getUniqueId()).getZombiesMacron().add(e1);
 	}
 	
@@ -1508,7 +1508,7 @@ public class KitsListener implements Listener {
 					Bukkit.broadcastMessage(main.getPrefix() + "§e§lFin de la §9§lPluie §cde §4§lT§f§lN§4§lT §e§l!");
 					return;
 				}
-				Index.sendActionBar(player, main.getPrefix() + "§9§lPluie §cde §4§lT§f§lN§4§lT §edure encore " + playerkits.getTimerPluieTNT() + " §esecondes.");
+				PvPKits.sendActionBar(player, main.getPrefix() + "§9§lPluie §cde §4§lT§f§lN§4§lT §edure encore " + playerkits.getTimerPluieTNT() + " §esecondes.");
 				playerkits.removeSecondPluieTNT();
 				
 			}
@@ -1567,7 +1567,7 @@ public class KitsListener implements Listener {
 					Bukkit.broadcastMessage(main.getPrefix() + "§f§lFin de l'"+CSMili.ARRAIN.getName()+" §f§l!");
 					return;
 				}
-				Index.sendActionBar(player, main.getPrefix() + CSMili.ARRAIN.getName() + " §fdure encore " + playerkits.getTimerPluieFleches() + " §fsecondes.");
+				PvPKits.sendActionBar(player, main.getPrefix() + CSMili.ARRAIN.getName() + " §fdure encore " + playerkits.getTimerPluieFleches() + " §fsecondes.");
 				playerkits.removeSecondPluieFleches();
 			}
 		};
@@ -1591,7 +1591,7 @@ public class KitsListener implements Listener {
 					cancel();
 					return;
 				}
-				Index.sendActionBar(player, main.getPrefix() + "§fFin de §7§lN§5uage §2§lT§aoxique §f dans §f§l" + playerkits.getToadBlocks().getValue() + "§fs !");
+				PvPKits.sendActionBar(player, main.getPrefix() + "§fFin de §7§lN§5uage §2§lT§aoxique §f dans §f§l" + playerkits.getToadBlocks().getValue() + "§fs !");
 				playerkits.removeSecondTimerToad();
 			}
 		};
