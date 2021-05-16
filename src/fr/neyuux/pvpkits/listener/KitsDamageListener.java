@@ -59,7 +59,7 @@ public class KitsDamageListener implements Listener {
 		if (e instanceof Player)
 			for (UUID id : main.players) {
 				Player p = Bukkit.getPlayer(id);
-				if (main.playerkits.get(p.getUniqueId()).isKit(Kits.ALLAHU_AKBAR) && !main.playerkits.get(((Player) e).getUniqueId()).isKit(Kits.ALLAHU_AKBAR)) {
+				if (main.playerkits.get(p.getUniqueId()).isKit(Kits.ALLAHU_AKBAR) && !main.playerkits.get(e.getUniqueId()).isKit(Kits.ALLAHU_AKBAR)) {
 					double added = fdamage / 6;
 					p.setHealth(Math.min(added + p.getHealth(), p.getMaxHealth()));
 				}
@@ -546,13 +546,13 @@ public class KitsDamageListener implements Listener {
 					Bukkit.broadcastMessage(main.getPrefix() + Bukkit.getPlayer(id).getDisplayName());
 				for (Player p : Bukkit.getOnlinePlayers())
 					p.playSound(p.getLocation(), Sound.ZOMBIE_REMEDY, 9, 1);
-				main.sendTitleForAllPlayers("ßcßlßnßkaa ßeßlßnVictoire de la team " + team.getColor() + team.getAdjectiveName() + " ßcßlßnßkaaßr", "ß6ßlßnNombre de Survivants ß7ßl: ßf" + main.players.size(), 20, 180, 20);
+				PvPKits.sendTitleForAllPlayers("ßcßlßnßkaa ßeßlßnVictoire de la team " + team.getColor() + team.getAdjectiveName() + " ßcßlßnßkaaßr", "ß6ßlßnNombre de Survivants ß7ßl: ßf" + main.players.size(), 20, 180, 20);
 				
 			} else if (Teams.getAliveTeams().size() == 0) {
 				Bukkit.broadcastMessage(main.getPrefix() + "ßeAucune Team ne s'en est sortie vivante. ßc…GALIT…E PARFAITE.");
 				for (Player p : Bukkit.getOnlinePlayers())
 					p.playSound(p.getLocation(), Sound.ZOMBIE_REMEDY, 8, 1);
-				main.sendTitleForAllPlayers("ß5ßkaa ßcßlßn…galitÈ ß5ßkaa", "ßcAucun survivant.", 20, 120, 20);
+				PvPKits.sendTitleForAllPlayers("ß5ßkaa ßcßlßn…galitÈ ß5ßkaa", "ßcAucun survivant.", 20, 120, 20);
 			}
 		}
 	}

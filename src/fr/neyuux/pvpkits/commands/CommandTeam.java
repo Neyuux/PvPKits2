@@ -1,21 +1,21 @@
 package fr.neyuux.pvpkits.commands;
 
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.UUID;
-
+import fr.neyuux.pvpkits.PvPKits;
+import fr.neyuux.pvpkits.enums.Teams;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import fr.neyuux.pvpkits.PvPKits;
-import fr.neyuux.pvpkits.enums.Teams;
+
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 public class CommandTeam implements CommandExecutor {
 	
-	private PvPKits main;
+	private final PvPKits main;
 	
 	public CommandTeam(PvPKits main) {
 		this.main = main;
@@ -34,13 +34,13 @@ public class CommandTeam implements CommandExecutor {
 				sender.sendMessage(aide);
 			
 			else if (args[0].equalsIgnoreCase("list")) {
-				String message = "§bListe des teams en vie : §l";
+				StringBuilder message = new StringBuilder("§bListe des teams en vie : §l");
 				for (Teams t : Teams.values()) {
 					if (t.equals(Teams.NONE) || t.getPlayers().size() == 0) continue;
 	
-					message = message + "\n" + "§b§l - " + t.getColor() + t.getName() + "§7(§8" + t.getPlayers().size() + "§7) §f ";
+					message.append("\n").append("§b§l - ").append(t.getColor()).append(t.getName()).append("§7(§8").append(t.getPlayers().size()).append("§7) §f ");
 				}
-				if (message.equals("§bListe des teams en vie : §l")) sender.sendMessage(main.getPrefix() + "§cAucune équipe de contient de joueur.");
+				if (message.toString().equals("§bListe des teams en vie : §l")) sender.sendMessage(main.getPrefix() + "§cAucune équipe de contient de joueur.");
 				else sender.sendMessage(main.getPrefix() + message);
 				
 				
@@ -68,7 +68,7 @@ public class CommandTeam implements CommandExecutor {
 					Bukkit.broadcastMessage(main.getPrefix() + p.getDisplayName() + " §fa quitté la "+t.getColor()+"§lTeam " + t.getAdjectiveName() + "§f !");
 					main.playerkits.get(p.getUniqueId()).setRetour(null);
 					main.playerkits.get(p.getUniqueId()).setKit(null);
-					if (main.players.contains(p.getUniqueId())) main.players.remove(p.getUniqueId());
+					main.players.remove(p.getUniqueId());
 					
 					} else
 						p.sendMessage(main.getPrefix() + "§4[§cErreur§4] §cVous n'êtes pas dans une team !");
@@ -89,7 +89,7 @@ public class CommandTeam implements CommandExecutor {
 					p.sendMessage(main.getPrefix() + "§4[§cErreur§4] §cLa team §4\"§e" + args[1] + "§4\" §cn'existe pas ! §e§o(Rouge, Bleu, Vert, Jaune, Rose, Noir)");
 					return false;
 				}
-				if (main.players.contains(p.getUniqueId())) main.players.remove(p.getUniqueId());
+				main.players.remove(p.getUniqueId());
 				main.addPlayerTeam(p, t);
 				
 			} else if (args[0].equalsIgnoreCase("info")) {
@@ -103,10 +103,10 @@ public class CommandTeam implements CommandExecutor {
 					player.sendMessage(main.getPrefix() + "§4[§cErreur§4] §cVous devez être dans une team pour effectuer cette commande !");
 					return false;
 				}
-				String steam = "";
+				StringBuilder steam = new StringBuilder();
 				
 				for (Player p : t.getPlayers())
-					steam = steam + "\n" + " - " +  p.getDisplayName();
+					steam.append("\n").append(" - ").append(p.getDisplayName());
 				player.sendMessage(main.getPrefix() + "Informations sur la team " + t.getColor() + t.getAdjectiveName() + " §f: ");
 				player.sendMessage("Joueurs §8(§7"+ t.getPlayers().size() + "§8) §f: §f§l" + steam );
 				

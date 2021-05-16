@@ -44,7 +44,7 @@ public class KitsAutoStop extends BukkitRunnable {
 					Integer v2 = e2.getValue();
 					return v1.compareTo(v2);
 				};
-		        List<Entry<UUID, Integer>> listOfEntries = new ArrayList<Entry<UUID, Integer>>();
+		        List<Entry<UUID, Integer>> listOfEntries = new ArrayList<>();
 		        for (PlayerKits pk : main.playerkits.values())
 		        	listOfEntries.add(new SimpleEntry<>(pk.getPlayer().getUniqueId(), pk.getKills()));
 		        

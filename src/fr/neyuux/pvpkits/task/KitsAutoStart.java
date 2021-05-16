@@ -64,7 +64,7 @@ public class KitsAutoStart extends BukkitRunnable {
 				Bukkit.broadcastMessage(main.getPrefix() + t.getColor() + t.getName() + " §7: §c" + t.getPlayers().size() + " joueur");
 			cancel();
 			Bukkit.broadcastMessage(main.getPrefix() + "§eLancement du jeu !");
-			main.sendTitleForAllPlayers("§b§lGO !", "", 20, 20, 20);
+			PvPKits.sendTitleForAllPlayers("§b§lGO !", "", 20, 20, 20);
 			if (main.getGameConfig().hasVieTab())
 				Bukkit.getScoreboardManager().getMainScoreboard().getObjective("health").setDisplaySlot(DisplaySlot.PLAYER_LIST);
 			else
@@ -133,22 +133,22 @@ public class KitsAutoStart extends BukkitRunnable {
 		
 		
 		if (timer==9) {
-		main.sendTitleForAllPlayers("§4§l10", "§c§oPréparation...", 20, 30, 20);
+		PvPKits.sendTitleForAllPlayers("§4§l10", "§c§oPréparation...", 20, 30, 20);
 		for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 8, 1);
 		} else if (timer==4) {
-			main.sendTitleForAllPlayers("§6§l5", "§cAttention !", 5, 10, 5);
+			PvPKits.sendTitleForAllPlayers("§6§l5", "§cAttention !", 5, 10, 5);
 			for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 8, 1.1f);
 		} else if (timer==3) {
-			main.sendTitleForAllPlayers("§e§l4", "§cAttention !", 5, 10, 5);
+			PvPKits.sendTitleForAllPlayers("§e§l4", "§cAttention !", 5, 10, 5);
 			for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 8, 1.2f);
 		} else if (timer==2) {
-			main.sendTitleForAllPlayers("§2§l3", "§6A vos marques...", 5, 10, 5);
+			PvPKits.sendTitleForAllPlayers("§2§l3", "§6A vos marques...", 5, 10, 5);
 			for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 8, 1.5f);
 		} else if (timer==1) {
-			main.sendTitleForAllPlayers("§a§l2", "§ePrêts ?", 5, 10, 5);
+			PvPKits.sendTitleForAllPlayers("§a§l2", "§ePrêts ?", 5, 10, 5);
 			for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 8, 1.7f);
 		} else if (timer==0) {
-			main.sendTitleForAllPlayers("§f§l1", "§aDécollage...", 5, 10, 5);
+			PvPKits.sendTitleForAllPlayers("§f§l1", "§aDécollage...", 5, 10, 5);
 			for (Player p : Bukkit.getOnlinePlayers()) p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 8, 2);
 		}
 			

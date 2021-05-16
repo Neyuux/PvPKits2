@@ -47,7 +47,7 @@ import java.util.Map.Entry;
 public class KitsListener implements Listener {
 	
 	private final PvPKits main;
-	private final HashMap<Kits, List<String>> kitsLores = new HashMap<Kits, List<String>>();
+	private final HashMap<Kits, List<String>> kitsLores = new HashMap<>();
 	public KitsListener(PvPKits main) {
 		this.main = main;
 		kitsLores.put(Kits.TOAD, Arrays.asList("§6§l§nCapacité Spéciale§r §7\"§7§lN§5uage §2§lT§aoxique§7\" §6§l§n:§e Fait", "§eapparaître un nuage toxique qui donne Wither", "§eà toutes les personnes qui y passent.", "§b§nPassif§r §b§n:§f Obtient Régénération à côté de ses alliés §o(5blocks)", "§2Casque §6en §lCuir§7(§8Prot §46§7, §3Ub §f1§7, §5Thorns §46§7) §fx2", "§1Plastron §fen §lFer§7(§8Protection §a2§7)", "§bPantalon §fen §lFer§7(§8Protection §a2§7)", "§aBottes §fen §lFer§7(§8Protection §a2§7)", "§4Épée §ben §lDiamant§7(§4Sharpness §f1§7)", "§2Potion de Poison §833s", "§8Potion de Wither 20s", "§9§nClasse§r §9§n:§1 Combattant"));
@@ -234,7 +234,7 @@ public class KitsListener implements Listener {
 				String[] with = msg.split("!");
 				event.setFormat("§8[§7Global§8] " + sender.getDisplayName() + "§r §7»§f " + with[1].trim());
 			} else {
-				List<Player> teammates = new ArrayList<Player>();
+				List<Player> teammates = new ArrayList<>();
 				event.setCancelled(true);
 				for(Player p : Bukkit.getOnlinePlayers())
 					if (main.playerkits.get(p.getUniqueId()).getTeam().equals(senderkits.getTeam()))
@@ -469,7 +469,7 @@ public class KitsListener implements Listener {
 				
 				if (playerkits.isKit(Kits.TOAD))
 					if (playerkits.getTeam().getPlayers().size() >= 2) {
-						List<Player> proches = new ArrayList<Player>();
+						List<Player> proches = new ArrayList<>();
 						
 						if (player.getGameMode().equals(GameMode.SURVIVAL))
 							for (Entity ne : player.getNearbyEntities(3, 3, 3))
@@ -487,7 +487,7 @@ public class KitsListener implements Listener {
 					}
 				
 				if (playerkits.isKit(Kits.MACRON)) {
-					List<Player> proches = new ArrayList<Player>();
+					List<Player> proches = new ArrayList<>();
 					
 					if (player.getGameMode().equals(GameMode.SURVIVAL))
 						for (Entity ne : player.getNearbyEntities(30, 30, 30))
@@ -754,46 +754,46 @@ public class KitsListener implements Listener {
 						player.teleport(new Location(player.getWorld(), PositionX + 0.5, PositionY, PositionZ + 0.5));
 						playerkits.startPyroBlocks();
 						
-						SetPyroBlock(player, playerkits, PositionX + 1, PositionY, PositionZ, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX - 1, PositionY, PositionZ, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ + 1, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ - 1, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX + 1, PositionY + 1, PositionZ, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX - 1, PositionY + 1, PositionZ, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX, PositionY + 1, PositionZ + 1, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX, PositionY + 1, PositionZ - 1, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX, PositionY + 2, PositionZ, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX, PositionY + 2, PositionZ, Material.STATIONARY_LAVA);
-						SetPyroBlock(player, playerkits, PositionX + 2, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 2, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ + 2, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ - 2, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 1, PositionY, PositionZ + 1, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 1, PositionY, PositionZ - 1, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 3, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 3, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ + 3, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ - 3, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 2, PositionY, PositionZ + 2, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 2, PositionY, PositionZ - 2, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 4, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 4, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ + 4, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ - 4, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 3, PositionY, PositionZ + 3, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 3, PositionY, PositionZ - 3, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 5, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 5, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ + 5, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ - 5, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 4, PositionY, PositionZ + 4, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 4, PositionY, PositionZ - 4, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 6, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 6, PositionY, PositionZ, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ + 6, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX, PositionY, PositionZ - 6, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX + 5, PositionY, PositionZ + 5, Material.FIRE);
-						SetPyroBlock(player, playerkits, PositionX - 5, PositionY, PositionZ - 5, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 1, PositionY, PositionZ, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX - 1, PositionY, PositionZ, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ + 1, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ - 1, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX + 1, PositionY + 1, PositionZ, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX - 1, PositionY + 1, PositionZ, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX, PositionY + 1, PositionZ + 1, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX, PositionY + 1, PositionZ - 1, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX, PositionY + 2, PositionZ, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX, PositionY + 2, PositionZ, Material.STATIONARY_LAVA);
+						SetPyroBlock(playerkits, PositionX + 2, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 2, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ + 2, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ - 2, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 1, PositionY, PositionZ + 1, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 1, PositionY, PositionZ - 1, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 3, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 3, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ + 3, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ - 3, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 2, PositionY, PositionZ + 2, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 2, PositionY, PositionZ - 2, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 4, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 4, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ + 4, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ - 4, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 3, PositionY, PositionZ + 3, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 3, PositionY, PositionZ - 3, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 5, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 5, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ + 5, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ - 5, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 4, PositionY, PositionZ + 4, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 4, PositionY, PositionZ - 4, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 6, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 6, PositionY, PositionZ, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ + 6, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX, PositionY, PositionZ - 6, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX + 5, PositionY, PositionZ + 5, Material.FIRE);
+						SetPyroBlock(playerkits, PositionX - 5, PositionY, PositionZ - 5, Material.FIRE);
 						
 						Location loc = player.getLocation();
 		                for(int i = 0; i <360; i+=5){
@@ -1181,7 +1181,7 @@ public class KitsListener implements Listener {
 			p.setFallDistance(0f);
 			
 			p.setGameMode(GameMode.SURVIVAL);
-			main.getPlayerTeam(p, playerkits.getTeam()).addEntry(p.getName());;
+			main.getPlayerTeam(p, playerkits.getTeam()).addEntry(p.getName());
 			main.players.add(p.getUniqueId());
 			main.spectators.remove(p);
 			p.setHealth(20.0);
@@ -1343,7 +1343,7 @@ public class KitsListener implements Listener {
 		player.getInventory().setItem(4, main.getItem("§a§lChoisir le Kit §7 : §b["+kit.getName()+"§r§b]", null, Material.MAGMA_CREAM, (short)0));
 		player.updateInventory();
 		player.playSound(Salle, Sound.NOTE_PLING, 6, 1);
-		main.sendTitle(player, "§a§lConfirmez votre §6kit", "§2Voulez-vous choisir le §6kit " + kit.getName() + "§2 ?", 10, 30, 10);
+		PvPKits.sendTitle(player, "§a§lConfirmez votre §6kit", "§2Voulez-vous choisir le §6kit " + kit.getName() + "§2 ?", 10, 30, 10);
 		
 		for (String s : kitsLores.get(kit))
 			player.sendMessage(s);
@@ -1436,7 +1436,7 @@ public class KitsListener implements Listener {
 		Zombie e1 = (Zombie) e;
 		EntityEquipment ee = e1.getEquipment();
 		
-		ee.setChestplate(getZombieArmor(Material.GOLD_CHESTPLATE, null, Arrays.asList(new SimpleEntry<Enchantment, Integer>(Enchantment.PROTECTION_ENVIRONMENTAL, 6), new SimpleEntry<Enchantment, Integer>(Enchantment.PROTECTION_PROJECTILE, 6))));
+		ee.setChestplate(getZombieArmor(Material.GOLD_CHESTPLATE, null, Arrays.asList(new SimpleEntry<>(Enchantment.PROTECTION_ENVIRONMENTAL, 6), new SimpleEntry<>(Enchantment.PROTECTION_PROJECTILE, 6))));
 		
 		ItemStack phead = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
 		SkullMeta pheadmeta = (SkullMeta) phead.getItemMeta();
@@ -1454,7 +1454,7 @@ public class KitsListener implements Listener {
 	}
 	
 	
-	private void SetPyroBlock(Player player, PlayerKits playerkits, int PositionX, int PositionY, int PositionZ, Material material) {
+	private void SetPyroBlock(PlayerKits playerkits, int PositionX, int PositionY, int PositionZ, Material material) {
 		Block b = Bukkit.getWorld("PvPKits").getBlockAt(PositionX, PositionY, PositionZ);
 		
 		if (b.getType().equals(Material.AIR))
@@ -1478,13 +1478,13 @@ public class KitsListener implements Listener {
 	
 	
 	private BukkitRunnable CSAllahuAkbar(Player player, PlayerKits playerkits) {
-		
-		BukkitRunnable r = new BukkitRunnable() {
-			
+
+		return new BukkitRunnable() {
+
 			@Override
 			public void run() {
 				int i = 10;
-				
+
 				while (i != 0) {
 					int x = -(new Random().nextInt(386) + 1) + -200;
 					int z = -(new Random().nextInt(296) + 1) + 3;
@@ -1501,7 +1501,7 @@ public class KitsListener implements Listener {
 					playerkits.getTNTAllahu().add(tnt);
 					i--;
 				}
-				
+
 				if (playerkits.getTimerPluieTNT() == 0) {
 					playerkits.setTimerPluieTNT(-1);
 					cancel();
@@ -1510,47 +1510,45 @@ public class KitsListener implements Listener {
 				}
 				PvPKits.sendActionBar(player, main.getPrefix() + "§9§lPluie §cde §4§lT§f§lN§4§lT §edure encore " + playerkits.getTimerPluieTNT() + " §esecondes.");
 				playerkits.removeSecondPluieTNT();
-				
+
 			}
 		};
-		
-		return r;
 	}
 	
 	private BukkitRunnable CSMiliArrain(Player player, PlayerKits playerkits) {
-		
-		BukkitRunnable r = new BukkitRunnable() {
-			
+
+		return new BukkitRunnable() {
+
 			@Override
 			public void run() {
-				
+
 				for (UUID uuid : main.players) {
 					Player p = Bukkit.getPlayer(uuid);
 					if (p.getGameMode().equals(GameMode.SURVIVAL))
 						if (!playerkits.getTeam().equals(main.playerkits.get(p.getUniqueId()).getTeam())) {
-							
-							Random r = new Random();
-							double x = r.nextInt(6) + r.nextDouble();
-							double z = r.nextInt(6) + r.nextDouble();
-							if (r.nextBoolean())
+
+							Random r1 = new Random();
+							double x = r1.nextInt(6) + r1.nextDouble();
+							double z = r1.nextInt(6) + r1.nextDouble();
+							if (r1.nextBoolean())
 								x = -x;
-							if (r.nextBoolean())
+							if (r1.nextBoolean())
 								z = -z;
-							
-							double x2 = r.nextInt(6) + r.nextDouble();
-							double z2 = r.nextInt(6) + r.nextDouble();
-							if (r.nextBoolean())
+
+							double x2 = r1.nextInt(6) + r1.nextDouble();
+							double z2 = r1.nextInt(6) + r1.nextDouble();
+							if (r1.nextBoolean())
 								x2 = -x2;
-							if (r.nextBoolean())
+							if (r1.nextBoolean())
 								z2 = -z2;
-							
-							double x3 = r.nextInt(6) + r.nextDouble();
-							double z3 = r.nextInt(6) + r.nextDouble();
-							if (r.nextBoolean())
+
+							double x3 = r1.nextInt(6) + r1.nextDouble();
+							double z3 = r1.nextInt(6) + r1.nextDouble();
+							if (r1.nextBoolean())
 								x3 = -x3;
-							if (r.nextBoolean())
+							if (r1.nextBoolean())
 								z3 = -z3;
-							
+
 							Arrow a = (Arrow) p.getWorld().spawnEntity(new Location(p.getWorld(), p.getLocation().getX() + x, p.getEyeLocation().getBlockY() + 3, p.getLocation().getZ() + z), EntityType.ARROW);
 							Arrow a2 = (Arrow) p.getWorld().spawnEntity(new Location(p.getWorld(), p.getLocation().getX() + x2, p.getEyeLocation().getBlockY() + 3, p.getLocation().getZ() + z2), EntityType.ARROW);
 							Arrow a3 = (Arrow) p.getWorld().spawnEntity(new Location(p.getWorld(), p.getLocation().getX() + x3, p.getEyeLocation().getBlockY() + 3, p.getLocation().getZ() + z3), EntityType.ARROW);
@@ -1559,7 +1557,7 @@ public class KitsListener implements Listener {
 							a3.setShooter(player);
 						}
 				}
-				
+
 
 				if (playerkits.getTimerPluieFleches() == 0) {
 					playerkits.setTimerPluieFleches(-1);
@@ -1571,21 +1569,19 @@ public class KitsListener implements Listener {
 				playerkits.removeSecondPluieFleches();
 			}
 		};
-		
-		return r;
 	}
 	
 	
 	private BukkitRunnable CSToad(Player player, PlayerKits playerkits) {
 
-		BukkitRunnable r = new BukkitRunnable() {
-			
+		return new BukkitRunnable() {
+
 			@Override
 			public void run() {
-				
+
 				for (Block b : playerkits.getToadBlocks().getKey())
 					player.getWorld().spigot().playEffect(b.getLocation(), Effect.CLOUD, 0, 0, 0.0F, 0.0F, 0.0F, 0.0F, 32, 5);
-				
+
 				if (playerkits.getToadBlocks().getValue() == 0) {
 					playerkits.resetTimerToad();
 					cancel();
@@ -1595,35 +1591,31 @@ public class KitsListener implements Listener {
 				playerkits.removeSecondTimerToad();
 			}
 		};
-		
-		return r;
 	}
 	
 	
 	private BukkitRunnable CSXRayTP(Player player, PlayerKits playerkits, Player toP) {
-		List<Player> teammates = new ArrayList<Player>(playerkits.getTeam().getPlayers());
-		
-		BukkitRunnable r = new BukkitRunnable() {
-			
+		List<Player> teammates = new ArrayList<>(playerkits.getTeam().getPlayers());
+
+		return new BukkitRunnable() {
+
 			@Override
 			public void run() {
 				if (teammates.isEmpty()) {
 					cancel();
 					return;
 				}
-				
-				
+
+
 				Player pl = teammates.get(0);
-				
+
 				pl.teleport(toP);
 				pl.sendMessage(main.getPrefix() + player.getDisplayName() + " §bvous a téléporté à " + toP.getDisplayName());
 				pl.playSound(toP.getLocation(), Sound.ENDERMAN_TELEPORT, 6, 1);
-				
+
 				teammates.remove(pl);
 			}
 		};
-		
-		return r;
 	}
 	
 	

@@ -1,9 +1,9 @@
 package fr.neyuux.pvpkits.commands;
 
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.UUID;
-
+import fr.neyuux.pvpkits.PlayerKits;
+import fr.neyuux.pvpkits.PvPKits;
+import fr.neyuux.pvpkits.enums.Gstate;
+import fr.neyuux.pvpkits.enums.Teams;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -12,14 +12,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
-import fr.neyuux.pvpkits.PvPKits;
-import fr.neyuux.pvpkits.PlayerKits;
-import fr.neyuux.pvpkits.enums.Gstate;
-import fr.neyuux.pvpkits.enums.Teams;
+
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 public class SpecExecutor implements Listener {
 
-	private PvPKits main;
+	private final PvPKits main;
 	
 	public SpecExecutor(PvPKits main) {
 		this.main = main;
@@ -80,7 +80,7 @@ public class SpecExecutor implements Listener {
 						player.sendMessage(main.getPrefix() + "§9Votre mode de jeu a été établi en spectateur.");
 						player.sendMessage(main.getPrefix() + "§c§lPour revenir au mode non-spectateur : utilisez la commande : §7/spec off §c.");
 						main.spectators.add(player);
-						if (main.players.contains(player.getUniqueId())) main.players.remove(player.getUniqueId());
+						main.players.remove(player.getUniqueId());
 				} else
 					player.sendMessage(main.getPrefix() + "§4[§cErreur§4] §cVous êtes déjà un spectateur !");
 					
@@ -89,9 +89,9 @@ public class SpecExecutor implements Listener {
 				
 			} else if (arg0.equalsIgnoreCase("list")) {
 				
-				String specs = "\n";
+				StringBuilder specs = new StringBuilder("\n");
 				for (Player p : main.spectators) {
-					specs = specs + "\n" + " - " +  p.getName();
+					specs.append("\n").append(" - ").append(p.getName());
 				}
 				player.sendMessage(main.getPrefix() + "§7Liste des spectateurs : §f§l" + specs);
 				

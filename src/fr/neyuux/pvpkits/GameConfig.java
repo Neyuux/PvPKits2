@@ -231,9 +231,9 @@ public class GameConfig implements Listener {
 				}
 				for (Teams t : Teams.values())
 					if (t.getPlayers().size() > 0 && !t.equals(Teams.NONE)) {
-						String PlayersInTeam = "\n";
+						StringBuilder PlayersInTeam = new StringBuilder("\n");
 						for (Player p : t.getPlayers())
-							PlayersInTeam = PlayersInTeam + "\n" + "§f- " + p.getDisplayName();
+							PlayersInTeam.append("\n").append("§f- ").append(p.getDisplayName());
 						Bukkit.broadcastMessage("§9Membres de la team " + t.getColor() + t.getAdjectiveName() + "§f : " +PlayersInTeam);
 					}
 				
@@ -377,16 +377,13 @@ public class GameConfig implements Listener {
 		
 			if (!current.getType().equals(Material.STAINED_GLASS_PANE) && !current.getType().equals(Material.ARROW) && !current.getType().equals(Material.AIR) && !current.getType().equals(Material.BEDROCK)) {
 				Kits k = Kits.getByName(current.getItemMeta().getDisplayName());
-				
+				ItemMeta m = current.getItemMeta();
+				List<String> l = m.getLore();
 				if (this.KitsOff.contains(k)) {
-					ItemMeta m = current.getItemMeta();
-					List<String> l = m.getLore();
 					m.setLore(Arrays.asList(l.get(0), "§eÉtat : §aActivé"));
 					current.setItemMeta(m);
 					this.KitsOff.remove(k);
 				} else {
-					ItemMeta m = current.getItemMeta();
-					List<String> l = m.getLore();
 					m.setLore(Arrays.asList(l.get(0), "§eÉtat : §cDésactivé"));
 					current.setItemMeta(m);
 					this.KitsOff.add(k);
@@ -400,13 +397,13 @@ public class GameConfig implements Listener {
 			ev.setCancelled(true);
 			
 			if (current.getType().equals(Material.STAINED_CLAY)) {
-				List<Kits> KitsOn = new ArrayList<Kits>();
+				List<Kits> KitsOn = new ArrayList<>();
 				for (Kits t : Kits.values())
 					if (!this.KitsOff.contains(t))
 						KitsOn.add(t);
-				ArrayList<Player> players = new ArrayList<Player>(Bukkit.getOnlinePlayers());
+				ArrayList<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 					
-				for(Player p : new ArrayList<Player>(players)) {
+				for(Player p : new ArrayList<>(players)) {
 					if (main.spectators.contains(p) || main.playerkits.get(p.getUniqueId()).isTeam(Teams.NONE))
 						players.remove(p);
 					main.players.remove(p.getUniqueId());
@@ -465,7 +462,7 @@ public class GameConfig implements Listener {
 			if (current.getType().equals(Material.ARROW))
 				player.openInventory(getJoueursInv());
 			else if (current.getType().equals(Material.WOOL) && current.getDurability() == 8) {
-				Inventory invChangeTeam = null;
+				Inventory invChangeTeam;
 				if (p.getDisplayName().length() <= (32 - 8))
 					invChangeTeam = Bukkit.createInventory(null, 45, "§e§lTeams " + p.getDisplayName());
 					else
@@ -494,7 +491,7 @@ public class GameConfig implements Listener {
 			}
 			else if (current.getType().equals(Material.NETHER_STAR)) {
 				if (!main.playerkits.get(p.getUniqueId()).getTeam().equals(Teams.NONE)) {
-					Inventory invChangeKit = null;
+					Inventory invChangeKit;
 					if (p.getDisplayName().length() <= (32 - 8))
 						invChangeKit = Bukkit.createInventory(null, 54, "§6§lKits " + p.getDisplayName());
 						else
@@ -603,14 +600,14 @@ public class GameConfig implements Listener {
 			ev.setCancelled(true);
 			
 			if (current.getType().equals(Material.WOOL)) {
-			List<Teams> TeamsOn = new ArrayList<Teams>();
+			List<Teams> TeamsOn = new ArrayList<>();
 			for (Teams t : Teams.values())
 				if (!t.equals(Teams.NONE) && !getTeamsOff().contains(t))
 					TeamsOn.add(t);
 			
 
 			int rdm = new Random().nextInt(TeamsOn.size());
-			Boolean teamok = Boolean.FALSE;
+			boolean teamok = Boolean.FALSE;
 			Teams team = TeamsOn.get(rdm);
 			while(!teamok) {
 				if (TeamsOn.size() == 1) {
@@ -636,7 +633,7 @@ public class GameConfig implements Listener {
 			} else if (current.getType().equals(Material.NETHER_STAR)) {
 				
 				if (!main.playerkits.get(p.getUniqueId()).isTeam(Teams.NONE)) {
-					List<Kits> KitsOn = new ArrayList<Kits>();
+					List<Kits> KitsOn = new ArrayList<>();
 					for (Kits t : Kits.values())
 						if (!this.KitsOff.contains(t))
 							KitsOn.add(t);
@@ -775,8 +772,8 @@ public class GameConfig implements Listener {
 	}
 	
 	private List<String> getTeamInvItemLore(Teams team) {
-		List<String> lores = new ArrayList<String>();
-		List<String> players = new ArrayList<String>();
+		List<String> lores = new ArrayList<>();
+		List<String> players = new ArrayList<>();
 		for (Player p : team.getPlayers())
 			players.add(p.getDisplayName());
 		String Etat = "§aActivé";
@@ -796,7 +793,7 @@ public class GameConfig implements Listener {
 	}
 	
 	private List<String> getTeamChangeItemLore(Teams team) {
-		List<String> lores = new ArrayList<String>();
+		List<String> lores = new ArrayList<>();
 		
 		lores.add(team.getSecondColor() + "Joueurs (" + team.getColor() + team.getPlayers().size() + team.getSecondColor() + ") : ");
 		for (Player p : team.getPlayers())
@@ -828,7 +825,7 @@ public class GameConfig implements Listener {
 	}
 	
 	private ItemStack getRandomedPlayersKitsItem() {
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new ArrayList<>();
 		for (Teams t : Teams.values())
 			if (!t.equals(Teams.NONE))
 				players.addAll(t.getPlayers());
@@ -836,7 +833,7 @@ public class GameConfig implements Listener {
 		ItemStack JParTeams = new ItemStack(Material.BANNER, players.size());
 		BannerMeta jptm = (BannerMeta) JParTeams.getItemMeta();
 		jptm.setDisplayName("§6Joueurs qui vont avoir un kit aléatoire");
-		List<String> lore = new ArrayList<String>();
+		List<String> lore = new ArrayList<>();
 		for (Player p : players) lore.add(p.getDisplayName());
 		jptm.setLore(lore);
 		jptm.setBaseColor(DyeColor.WHITE);
@@ -883,7 +880,7 @@ public class GameConfig implements Listener {
 		ItemMeta itm = it.getItemMeta();
 		itm.setDisplayName(kit.getName());
 		
-		Boolean etat = true;
+		boolean etat = true;
 		String setat = "§aActivé";
 		if (this.KitsOff.contains(kit)) etat = false;
 		if (!etat) setat = "§cDésactivé";
@@ -903,7 +900,7 @@ public class GameConfig implements Listener {
 		inv.setItem(15, main.getItem("§6§lKits", Arrays.asList("§fConfiguration des", "§fkits de la partie."), Material.COMMAND, (short)0));
 		inv.setItem(13, main.getItem("§f§lParamètres de la partie", Arrays.asList("§fConfiguration", "§fprincipale de la partie."), Material.APPLE, (short)0));
 		
-		List<String> ops = new ArrayList<String>();
+		List<String> ops = new ArrayList<>();
 		
 		for (Entry<String, List<UUID>> en : main.getGrades().entrySet())
 			for (UUID uuid : en.getValue())
@@ -950,7 +947,7 @@ public class GameConfig implements Listener {
 	
 	private Inventory getTeamRandomInv() {
 		Inventory inv = Bukkit.createInventory(null, 9, "§c§lMenu §e§lTeams §7Random");
-		List<String> TeamsOn = new ArrayList<String>();
+		List<String> TeamsOn = new ArrayList<>();
 		for (Teams t : Teams.values())
 			if (!this.TeamsOff.contains(t) && !t.equals(Teams.NONE))
 				TeamsOn.add(t.getColor() + t.getAdjectiveName());
@@ -973,7 +970,7 @@ public class GameConfig implements Listener {
 	
 	private Inventory getKitsRandomInv() {
 		Inventory inv = Bukkit.createInventory(null, 9, "§c§lMenu §6§lKits §7Random");
-		List<String> KitsOn = new ArrayList<String>();
+		List<String> KitsOn = new ArrayList<>();
 		for (Kits k : Kits.values())
 			if (!this.KitsOff.contains(k))
 				KitsOn.add(k.getName());
@@ -1010,7 +1007,7 @@ public class GameConfig implements Listener {
 		
 		ItemStack HideKits = new ItemStack(Material.SKULL_ITEM, 1, (short)SkullType.PLAYER.ordinal());
 		SkullMeta hkm = (SkullMeta)HideKits.getItemMeta();
-		String hkbv = Boolean.valueOf(this.HideKits).toString();
+		String hkbv;
 		if (this.HideKits) hkbv = "§aOui";
 		else hkbv = "§cNon";
 		hkm.setOwner("DKTroy");
@@ -1020,7 +1017,7 @@ public class GameConfig implements Listener {
 		
 		ItemStack VieTab = new ItemStack(Material.GOLDEN_APPLE);
 		ItemMeta vtm = VieTab.getItemMeta();
-		String vtbv = Boolean.valueOf(this.VieTab).toString();
+		String vtbv;
 		if (this.VieTab) vtbv = "§aOui";
 		else vtbv = "§cNon";
 		vtm.setDisplayName("§d§lVie §edans le §7tab");
@@ -1079,7 +1076,7 @@ public class GameConfig implements Listener {
 			pheadmeta.setOwner(p.getName());
 			pheadmeta.setDisplayName(p.getDisplayName());
 			
-			List<String> lores = new ArrayList<String>();
+			List<String> lores = new ArrayList<>();
 			String team = "§fTeam : §cAucune";
 			if (!pk.getTeam().equals(Teams.NONE))
 				team = "§fTeam : " + pk.getTeam().getColor() + "§l" + pk.getTeam().getAdjectiveName();
@@ -1119,7 +1116,7 @@ public class GameConfig implements Listener {
 	
 	private Inventory getConfigJoueurInv(Player target) {
 		PlayerKits targetkits = main.playerkits.get(target.getUniqueId());
-		Inventory inv = null;
+		Inventory inv;
 		if (target.getDisplayName().length() <= (32 - 8))
 		 inv = Bukkit.createInventory(null, 45, "§6§lMenu " + target.getDisplayName());
 		else
@@ -1128,7 +1125,7 @@ public class GameConfig implements Listener {
 		
 		ItemStack phead = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
 		SkullMeta pheadmeta = (SkullMeta) phead.getItemMeta();
-		List<String> lores = new ArrayList<String>();
+		List<String> lores = new ArrayList<>();
 		pheadmeta.setOwner(target.getName());
 		pheadmeta.setDisplayName(target.getDisplayName());
 		String spec = "§7Spectateur : §cNon";

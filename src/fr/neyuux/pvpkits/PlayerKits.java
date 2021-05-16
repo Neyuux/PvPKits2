@@ -299,7 +299,7 @@ public class PlayerKits {
 	}
 	
 	public void removeSecondLastTape() {
-		this.lastTape = new SimpleEntry<Entity, Integer>(this.lastTape.getKey(), this.lastTape.getValue() - 1);
+		this.lastTape = new SimpleEntry<>(this.lastTape.getKey(), this.lastTape.getValue() - 1);
 	}
 	
 	public int getKills() {
@@ -413,7 +413,7 @@ public class PlayerKits {
 	public enum Retour {
 		SALLE_KITS,
 		SALLE_TEAM,
-		SALLE_ATTENTE;
+		SALLE_ATTENTE
 	}
 	
 	public enum CSState {

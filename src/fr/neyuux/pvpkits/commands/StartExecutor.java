@@ -47,7 +47,7 @@ public class StartExecutor implements Listener {
 					Bukkit.broadcastMessage(main.getPrefix() + t.getColor() + t.getName() + " §7: §c" + t.getPlayers().size() + " joueur");
 				ev.getPlayer().closeInventory();
 				Bukkit.broadcastMessage(main.getPrefix() + "§eLancement du jeu !");
-				main.sendTitleForAllPlayers("§b§lGO !", "", 20, 20, 20);
+				PvPKits.sendTitleForAllPlayers("§b§lGO !", "", 20, 20, 20);
 				if (main.getGameConfig().hasVieTab())
 					Bukkit.getScoreboardManager().getMainScoreboard().getObjective("§4♥").setDisplaySlot(DisplaySlot.PLAYER_LIST);
 				else

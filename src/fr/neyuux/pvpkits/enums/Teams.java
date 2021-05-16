@@ -117,7 +117,6 @@ public enum Teams {
 			e.printStackTrace();
 			reloadLocations();
 		} finally {
-			if (spawnIle == null) throw new NullPointerException("SpawnIle est nul sur none");
 			if (!spawnIle.getChunk().isLoaded()) spawnIle.getChunk().load();
 		}
 		return spawnIle;
@@ -211,7 +210,7 @@ public enum Teams {
 	}
 
 	public static List<Teams> getAliveTeams() {
-		List<Teams> teams = new ArrayList<Teams>();
+		List<Teams> teams = new ArrayList<>();
 
 		for (Teams t : Teams.values())
 			if (!t.equals(Teams.NONE))
@@ -241,7 +240,7 @@ public enum Teams {
 	
 	
 	private static void reloadLocations() {
-		List<Teams> teams = new ArrayList<Teams>();
+		List<Teams> teams = new ArrayList<>();
 		Collections.addAll(teams, Teams.values());
 		
 		for (Teams t : teams)
