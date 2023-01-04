@@ -443,7 +443,7 @@ public class KitsListener implements Listener {
 					Player p = Bukkit.getPlayer(id);
 					PlayerKits pkits = main.playerkits.get(p.getUniqueId());
 					if (pkits.isKit(Kits.TOAD))
-						if (!playerkits.getTeam().contains(p))
+						if (playerkits.getTeam() != null && !playerkits.getTeam().contains(p))
 							if (pkits.getToadBlocks() != null)
 								if (pkits.getToadBlocks().getKey().contains(to.getBlock()))
 									if (!player.hasPotionEffect(PotionEffectType.WITHER)) {
@@ -1194,7 +1194,7 @@ public class KitsListener implements Listener {
 			}
 			pkits.GiveStuff();
 			if (pkits.isKit(Kits.LG)) {
-				pkits.setStuffLG(pkits.getStuffLG());
+				pkits.getStuffLG().GiveStuff(p);
 				p.setMaxHealth(15);
 			} else if (pkits.isKit(Kits.XRAYEUR)) {
 				p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 0, false, false));
@@ -1486,12 +1486,12 @@ public class KitsListener implements Listener {
 				int i = 10;
 
 				while (i != 0) {
-					int x = -(new Random().nextInt(386) + 1) + -200;
+					int x = -(new Random().nextInt(386) + 1) - 200;
 					int z = -(new Random().nextInt(296) + 1) + 3;
 					Location l = new Location(player.getWorld(), x, player.getWorld().getHighestBlockYAt(x, z) + 5, z);
 					if (l.getBlockY() < 46)
 						while (l.getBlockY() < 46) {
-							x = -(new Random().nextInt(386) + 1) + -200;
+							x = -(new Random().nextInt(386) + 1) - 200;
 							z = -(new Random().nextInt(296) + 1) + 3;
 							l = new Location(player.getWorld(), x, player.getWorld().getHighestBlockYAt(x, z) + 5, z);
 						}
