@@ -77,7 +77,8 @@ public class PvPKits extends JavaPlugin {
 		this.config = config;
 	}
 	
-	
+
+
 	@Override
 	public void onEnable() {
 		if (!System.getProperties().containsKey("RELOAD")) {
@@ -451,8 +452,7 @@ public class PvPKits extends JavaPlugin {
 		tc.add("Noir");//B
 		tc.add("");
 		
-		if (!s.getTeams().isEmpty() && tc.size() != 7) while (!s.getTeams().isEmpty()) System.out.println("slt");
-		else System.out.println(tc + " " + s.getTeams());
+		System.out.println(tc + " " + s.getTeams());
 		
 		for (String st : tc) {
 			String tabplace = "nulltabplace";

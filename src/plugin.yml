@@ -1,7 +1,7 @@
 name: PvPKits
-version: 1.0.4
+version: 1.0.5
 author: Neyuux_
-main: fr.neyuux.pvpkits.Index
+main: fr.neyuux.pvpkits.PvPKits
 commands:
   team:
     description: Commande des teams
