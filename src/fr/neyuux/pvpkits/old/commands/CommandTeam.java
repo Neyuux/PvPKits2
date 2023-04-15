@@ -1,7 +1,7 @@
-package fr.neyuux.pvpkits.commands;
+package fr.neyuux.pvpkits.old.commands;
 
-import fr.neyuux.pvpkits.PvPKits;
-import fr.neyuux.pvpkits.enums.Teams;
+import fr.neyuux.pvpkits.old.PvPKits;
+import fr.neyuux.pvpkits.old.enums.Teams;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

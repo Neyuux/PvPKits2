@@ -1,8 +1,8 @@
-package fr.neyuux.pvpkits;
+package fr.neyuux.pvpkits.old;
 
-import fr.neyuux.pvpkits.enums.Gstate;
-import fr.neyuux.pvpkits.enums.Kits;
-import fr.neyuux.pvpkits.enums.Teams;
+import fr.neyuux.pvpkits.old.enums.Gstate;
+import fr.neyuux.pvpkits.old.enums.Kits;
+import fr.neyuux.pvpkits.old.enums.Teams;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

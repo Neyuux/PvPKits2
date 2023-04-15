@@ -1,4 +1,4 @@
-package fr.neyuux.pvpkits.enums;
+package fr.neyuux.pvpkits.old.enums;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

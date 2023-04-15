@@ -1,9 +1,9 @@
-package fr.neyuux.pvpkits.task;
+package fr.neyuux.pvpkits.old.task;
 
-import fr.neyuux.pvpkits.PvPKits;
-import fr.neyuux.pvpkits.PlayerKits;
-import fr.neyuux.pvpkits.ScoreboardSign;
-import fr.neyuux.pvpkits.enums.Gstate;
+import fr.neyuux.pvpkits.old.PvPKits;
+import fr.neyuux.pvpkits.old.PlayerKits;
+import fr.neyuux.pvpkits.old.ScoreboardSign;
+import fr.neyuux.pvpkits.old.enums.Gstate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.BukkitRunnable;

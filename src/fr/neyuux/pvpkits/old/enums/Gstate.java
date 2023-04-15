@@ -1,4 +1,4 @@
-package fr.neyuux.pvpkits.enums;
+package fr.neyuux.pvpkits.old.enums;
 
 public enum Gstate {
 

@@ -1,12 +1,12 @@
-package fr.neyuux.pvpkits.commands;
+package fr.neyuux.pvpkits.old.commands;
 
-import fr.neyuux.pvpkits.PvPKits;
-import fr.neyuux.pvpkits.PlayerKits;
-import fr.neyuux.pvpkits.PlayerKits.CSState;
-import fr.neyuux.pvpkits.enums.Gstate;
-import fr.neyuux.pvpkits.enums.Kits;
-import fr.neyuux.pvpkits.enums.Teams;
-import fr.neyuux.pvpkits.task.GameRunnable;
+import fr.neyuux.pvpkits.old.PvPKits;
+import fr.neyuux.pvpkits.old.PlayerKits;
+import fr.neyuux.pvpkits.old.PlayerKits.CSState;
+import fr.neyuux.pvpkits.old.enums.Gstate;
+import fr.neyuux.pvpkits.old.enums.Kits;
+import fr.neyuux.pvpkits.old.enums.Teams;
+import fr.neyuux.pvpkits.old.task.GameRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;

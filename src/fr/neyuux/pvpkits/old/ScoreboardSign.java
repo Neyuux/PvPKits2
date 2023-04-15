@@ -1,4 +1,4 @@
-package fr.neyuux.pvpkits;
+package fr.neyuux.pvpkits.old;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
