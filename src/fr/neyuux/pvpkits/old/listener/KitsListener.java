@@ -1,12 +1,12 @@
-package fr.neyuux.pvpkits.listener;
+package fr.neyuux.pvpkits.old.listener;
 
 import com.google.common.collect.ImmutableList;
-import fr.neyuux.pvpkits.PvPKits;
-import fr.neyuux.pvpkits.PlayerKits;
-import fr.neyuux.pvpkits.PlayerKits.*;
-import fr.neyuux.pvpkits.enums.Gstate;
-import fr.neyuux.pvpkits.enums.Kits;
-import fr.neyuux.pvpkits.enums.Teams;
+import fr.neyuux.pvpkits.old.PvPKits;
+import fr.neyuux.pvpkits.old.PlayerKits;
+import fr.neyuux.pvpkits.old.PlayerKits.*;
+import fr.neyuux.pvpkits.old.enums.Gstate;
+import fr.neyuux.pvpkits.old.enums.Kits;
+import fr.neyuux.pvpkits.old.enums.Teams;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -216,7 +216,7 @@ public class KitsListener implements Listener {
 	public void onInv(InventoryDragEvent ev) {
 		if (ev.getInventory().getName().equals("container.inventory") && ev.getWhoClicked() instanceof Player) {
 			((Player)ev.getWhoClicked()).updateInventory();
-			System.out.println(ev.getWhoClicked().getName() + " " + Arrays.toString(ev.getWhoClicked().getInventory().getContents()));
+			Bukkit.getLogger().info(ev.getWhoClicked().getName() + " " + Arrays.toString(ev.getWhoClicked().getInventory().getContents()));
 		}
 	}
 	

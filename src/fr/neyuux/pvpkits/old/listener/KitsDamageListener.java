@@ -1,13 +1,13 @@
-package fr.neyuux.pvpkits.listener;
+package fr.neyuux.pvpkits.old.listener;
 
-import fr.neyuux.pvpkits.PvPKits;
-import fr.neyuux.pvpkits.PlayerKits;
-import fr.neyuux.pvpkits.PlayerKits.CSPyro;
-import fr.neyuux.pvpkits.ScoreboardSign;
-import fr.neyuux.pvpkits.enums.Gstate;
-import fr.neyuux.pvpkits.enums.Kits;
-import fr.neyuux.pvpkits.enums.Teams;
-import fr.neyuux.pvpkits.task.KitsAutoStop;
+import fr.neyuux.pvpkits.old.PvPKits;
+import fr.neyuux.pvpkits.old.PlayerKits;
+import fr.neyuux.pvpkits.old.PlayerKits.CSPyro;
+import fr.neyuux.pvpkits.old.ScoreboardSign;
+import fr.neyuux.pvpkits.old.enums.Gstate;
+import fr.neyuux.pvpkits.old.enums.Kits;
+import fr.neyuux.pvpkits.old.enums.Teams;
+import fr.neyuux.pvpkits.old.task.KitsAutoStop;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
